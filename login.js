@@ -1,6 +1,8 @@
 const fs = require('fs');
 const puppeteer = require('puppeteer');
 
+const MAX_RETRIES = 3;
+
 (async () => {
   // 读取 accounts.json 文件中的 JSON 字符串
   const accountsJson = fs.readFileSync('accounts.json', 'utf-8');
@@ -9,54 +11,65 @@ const puppeteer = require('puppeteer');
   for (const account of accounts) {
     const { username, password } = account;
 
-    const browser = await puppeteer.launch({ headless: false });
-    const page = await browser.newPage();
+    let isLoggedIn = false;
+    let retries = 0;
 
-    try {
-      await page.goto('https://dash.cloudflare.com/login', { waitUntil: 'domcontentloaded', timeout: 0 });
+    while (!isLoggedIn && retries < MAX_RETRIES) {
+      const browser = await puppeteer.launch({ headless: true });
+      const page = await browser.newPage();
 
-      // Wait for the login form to be visible
-      await page.waitForSelector('[data-testid="login-form"]', { visible: true, timeout: 30000 });
+      try {
+        await page.goto('https://dash.cloudflare.com/login', { waitUntil: 'networkidle0', timeout: 0 });
 
-      // 输入实际的用户名和密码
-      await page.type('#email', username);
-      await page.type('#password', password);
+        // Wait for the login form to be visible
+        await page.waitForSelector('[data-testid="login-form"]', { visible: true, timeout: 30000 });
 
-      // Add a delay before submitting the login form (adjust the delay time as needed)
-      await page.waitForTimeout(2000);
+        // 输入实际的用户名和密码
+        await page.type('#email', username);
+        await page.type('#password', password);
 
-      // 提交登录表单
-      await page.click('[name="login-submit-button"]');
+        // Add a delay before submitting the login form (adjust the delay time as needed)
+        await page.waitForTimeout(2000);
 
-      // Wait for successful login (or CAPTCHA/2FA prompt)
-      await page.waitForFunction(() => {
-        const logoutButton = document.querySelector('button[data-testid="logout-button"]');
-        const captchaForm = document.querySelector('form[data-testid="captcha-form"]');
-        const twofaForm = document.querySelector('form[data-testid="login-two-factor-form"]');
-        return logoutButton !== null || captchaForm !== null || twofaForm !== null;
-      }, { timeout: 60000 });
+        // 提交登录表单
+        await page.click('[name="login-submit-button"]');
 
-      // Check if login was successful
-      const isLoggedIn = await page.evaluate(() => {
-        const logoutButton = document.querySelector('button[data-testid="logout-button"]');
-        return logoutButton !== null;
-      });
+        // Wait for successful login (or CAPTCHA/2FA prompt)
+        await page.waitForFunction(() => {
+          const logoutButton = document.querySelector('button[data-testid="logout-button"]');
+          const captchaForm = document.querySelector('form[data-testid="captcha-form"]');
+          const twofaForm = document.querySelector('form[data-testid="login-two-factor-form"]');
+          return logoutButton !== null || captchaForm !== null || twofaForm !== null;
+        }, { timeout: 60000 });
 
-      if (isLoggedIn) {
-        console.log(`账号 ${username} 登录成功！`);
-      } else {
-        console.error(`账号 ${username} 登录失败，请检查账号和密码是否正确。`);
+        // Check if login was successful
+        isLoggedIn = await page.evaluate(() => {
+          const logoutButton = document.querySelector('button[data-testid="logout-button"]');
+          return logoutButton !== null;
+        });
+
+        if (isLoggedIn) {
+          console.log(`账号 ${username} 登录成功！`);
+        } else {
+          console.error(`账号 ${username} 登录失败，重试中...`);
+          retries++;
+        }
+      } catch (error) {
+        console.error(`账号 ${username} 登录时出现错误: ${error}`);
+        retries++;
+      } finally {
+        // 关闭页面和浏览器
+        await page.close();
+        await browser.close();
+
+        // 用户之间添加随机延时
+        const delay = Math.floor(Math.random() * 5000) + 1000; // 随机延时1秒到6秒之间
+        await delayTime(delay);
       }
-    } catch (error) {
-      console.error(`账号 ${username} 登录时出现错误: ${error}`);
-    } finally {
-      // 关闭页面和浏览器
-      await page.close();
-      await browser.close();
+    }
 
-      // 用户之间添加随机延时
-      const delay = Math.floor(Math.random() * 5000) + 1000; // 随机延时1秒到6秒之间
-      await delayTime(delay);
+    if (!isLoggedIn) {
+      console.error(`账号 ${username} 登录失败，重试次数超过最大限制。`);
     }
   }
 
