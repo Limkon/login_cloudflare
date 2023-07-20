@@ -15,33 +15,22 @@ const puppeteer = require('puppeteer');
     try {
       await page.goto('https://dash.cloudflare.com/login');
 
-      // 等待页面加载完成
-      await page.waitForTimeout(10000); // 增加等待时间，等待页面加载完全
-
-      // 清空邮箱和密码输入框的原有值
-      const emailInput = await page.$('#email');
-      const passwordInput = await page.$('#password');
-      if (emailInput && passwordInput) {
-        await emailInput.click({ clickCount: 3 }); // 选中输入框的内容
-        await emailInput.press('Backspace'); // 删除原有值
-        await passwordInput.click({ clickCount: 3 }); // 选中输入框的内容
-        await passwordInput.press('Backspace'); // 删除原有值
-      }
+      // Wait for the login form to be visible
+      await page.waitForSelector('[data-testid="login-form"]');
 
       // 输入实际的用户名和密码
       await page.type('#email', username);
       await page.type('#password', password);
 
       // 提交登录表单
-      const loginButton = await page.$('[name="login-submit-button"]');
-      if (loginButton) {
-        await loginButton.click();
-      } else {
-        throw new Error('无法找到登录按钮');
-      }
+      await page.click('[name="login-submit-button"]');
 
-      // 等待登录成功（如果有跳转页面的话）
-      await page.waitForNavigation();
+      // 等待登录成功（如果有跳转页面的话），或者等待错误提示出现
+      await page.waitForFunction(() => {
+        const logoutButton = document.querySelector('button[data-testid="logout-button"]');
+        const errorMessage = document.querySelector('.c_dx.c_bt');
+        return logoutButton !== null || errorMessage !== null;
+      });
 
       // 判断是否登录成功
       const isLoggedIn = await page.evaluate(() => {
