@@ -13,10 +13,10 @@ const puppeteer = require('puppeteer');
     const page = await browser.newPage();
 
     try {
-      await page.goto('https://dash.cloudflare.com/login');
+      await page.goto('https://dash.cloudflare.com/login', { waitUntil: 'domcontentloaded', timeout: 0 });
 
       // Wait for the login form to be visible
-      await page.waitForSelector('[data-testid="login-form"]');
+      await page.waitForSelector('[data-testid="login-form"]', { visible: true, timeout: 30000 });
 
       // 输入实际的用户名和密码
       await page.type('#email', username);
@@ -34,7 +34,7 @@ const puppeteer = require('puppeteer');
         const captchaForm = document.querySelector('form[data-testid="captcha-form"]');
         const twofaForm = document.querySelector('form[data-testid="login-two-factor-form"]');
         return logoutButton !== null || captchaForm !== null || twofaForm !== null;
-      });
+      }, { timeout: 60000 });
 
       // Check if login was successful
       const isLoggedIn = await page.evaluate(() => {
