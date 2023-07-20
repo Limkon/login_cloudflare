@@ -22,17 +22,21 @@ const puppeteer = require('puppeteer');
       await page.type('#email', username);
       await page.type('#password', password);
 
+      // Add a delay before submitting the login form (adjust the delay time as needed)
+      await page.waitForTimeout(2000);
+
       // 提交登录表单
       await page.click('[name="login-submit-button"]');
 
-      // 等待登录成功（如果有跳转页面的话），或者等待错误提示出现
+      // Wait for successful login (or CAPTCHA/2FA prompt)
       await page.waitForFunction(() => {
         const logoutButton = document.querySelector('button[data-testid="logout-button"]');
-        const errorMessage = document.querySelector('.c_dx.c_bt');
-        return logoutButton !== null || errorMessage !== null;
+        const captchaForm = document.querySelector('form[data-testid="captcha-form"]');
+        const twofaForm = document.querySelector('form[data-testid="login-two-factor-form"]');
+        return logoutButton !== null || captchaForm !== null || twofaForm !== null;
       });
 
-      // 判断是否登录成功
+      // Check if login was successful
       const isLoggedIn = await page.evaluate(() => {
         const logoutButton = document.querySelector('button[data-testid="logout-button"]');
         return logoutButton !== null;
