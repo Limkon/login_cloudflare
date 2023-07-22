@@ -4,6 +4,11 @@ const puppeteer = require('puppeteer');
 (async () => {
   const browser = await puppeteer.launch({ headless: false });
 
+  // 自定义延时函数
+  function delayTime(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
   try {
     // 读取 accounts.json 文件中的 JSON 字符串
     const accountsJson = fs.readFileSync('accounts.json', 'utf-8');
@@ -80,8 +85,3 @@ const puppeteer = require('puppeteer');
     await browser.close();
   }
 })();
-
-// 自定义延时函数
-function delayTime(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
