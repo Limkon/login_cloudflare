@@ -1,3 +1,4 @@
+
 const fs = require('fs');
 const puppeteer = require('puppeteer');
 
@@ -19,7 +20,7 @@ const puppeteer = require('puppeteer');
       let retries = 0;
       let success = false;
 
-      while (retries < 5 && !success) {
+      while (retries < 3 && !success) {
         const page = await browser.newPage();
 
         try {
@@ -43,13 +44,11 @@ const puppeteer = require('puppeteer');
           // 转到用户中心页面
           await page.goto('http://wwww.cq17.com:12345/index/User/index.html');
 
-          // 使用 waitForXPath 等待红包领取按钮
-          const redPacketButtonXPath = '//*[@class="signinqd"]';
-          await page.waitForXPath(redPacketButtonXPath);
-          const [redPacketButton] = await page.$x(redPacketButtonXPath);
+          // 等待页面加载完成
+          await page.waitForSelector('.signinqd');
 
           // 点击红包领取
-          await redPacketButton.click();
+          await page.click('.signinqd');
 
           // 在领取红包后执行其他操作...
 
@@ -75,7 +74,7 @@ const puppeteer = require('puppeteer');
       }
 
       if (!success) {
-        console.error(`账号 ${username} 尝试登录 5 次仍然失败`);
+        console.error(`账号 ${username} 尝试登录 3 次仍然失败`);
       }
     }
 
