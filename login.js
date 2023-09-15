@@ -26,7 +26,7 @@ function delayTime(ms) {
         const page = await browser.newPage();
 
         try {
-          await page.goto('http://wwww.cq17.com:12345/index/Index/Userlogins.html');
+          await page.goto('http://www.9hy.com/index/Index/Userlogins.html');
 
           // 等待页面加载完成
           await page.waitForSelector('#content_name');
@@ -44,7 +44,7 @@ function delayTime(ms) {
           await page.waitForNavigation();
 
           // 转到用户中心页面
-          await page.goto('http://wwww.cq17.com:12345/index/User/index.html');
+          await page.goto('http://www.9hy.com/index/User/index.html');
 
           // 等待页面加载完成
           await page.waitForSelector('.signinqd');
