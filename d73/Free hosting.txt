@@ -1,0 +1,110 @@
+比IaaS高层（无法重装或指定系统），比PaaS低层（可以访问文件系统，有的可以SSH连上去），一般使用cPanel。
+
+感觉比较好的：
+
+* https://alwaysdata.com 支持多种语言，版本也比较新，注册只需要邮箱。现在直连注册会报You are not allowed to subscribe to our services.
+* https://www.accuwebhosting.com/about/free-students-hosting 注册国家没有China
+https://www.ukhost4u.com/free-website-hosting-uk/
+https://3001.host/pricing/ 现在会自动跳到https://status.3001.host/
+https://www.2makeu.com/pricing 522
+
+---
+
+听说你在找免费虚拟主机？：
+速度、数据安全、网页安全（修改源代码、挂广告病毒）、随时消失（删库跑路）、难SEO、无客服、无法退出（要求付迁移费）、乱用信用卡
+
+---
+国内的，基本上都要实名+备案：
+热铁盒 https://host.retiehe.com/ https://rthe.cn/ 静态和单文件PHP
+乐云空间 https://www.renzhijia.com/buy/index/7/ ：2元/月，明说了稳定性差；注册需要姓名、手机号、地址
+
+酷番云 https://www.kcloudidc.com/freehost ：注册需要手机号、QQ号，需要实名认证，有效期一个月，联系客服免费续到最长一年
+主机蛋 http://www.idcegg.com/free/ ：有效期3个月，注册需要姓名、手机号、QQ号、邮箱、地址、身份证号
+金泰联 http://www.iiddcc.com/ ：注册需要姓名、手机号、QQ号、邮箱、地址、身份证号
+恒爱网络 http://www.zzhidc.com/freehost.html 两种方式，一种是发广告，另一种是充五块钱保证金
+番茄互联 https://www.fqidc.cn/free/ 每年2元；https://www.fqidc.cn/index.php/buy/index/10/
+蓝队云 https://www.landui.com/project/freehost/ 每天限额放出
+我的免费云 https://www.myfreeyun.com/ 不支持TLS1.2
+百度智能建站 https://aipage.baidu.com/ 可能收费
+强人网络 https://www.qiangren.net/html/active/vhost-free/ 好像从2020年5月开始就暂停申请了
+景安网络 https://www.zzidc.com/main/huodong/freehost 号称每天9点100台免费主机，现在好像没了
+https://www.henghost.com/sponsor.shtml
+https://www.xiaoji.la/ 签到得积分开通，可能缺货
+
+---
+国外的：
+
+https://neocities.org/ 网站本体开源
+https://www.nodehost.ca/ php mysql 访问很慢
+https://my.nexusbytes.com/cart.php?gid=1 python node php
+
+评测网站：https://hostingfacts.com/
+收集：http://www.100bestfreewebspace.com/searchPage0/Free-Host.html
+
+https://infinityfree.net/ ：单文件上限10MB；说是禁止使用广告拦截器，不过好像只是Dashboard等有广告，实际自己的网页不会插广告
+https://x10hosting.com/ ：有很多被莫名其妙删掉的网站
+https://www.awardspace.com/free-hosting/ ：慢、TOS中说可以把数据出售
+https://www.freehosting.com/ ：速度慢、删网站
+https://www.freehostia.com/ ：速度慢
+https://www.freewebhostingarea.com/
+http://www.zymic.com/free-web-hosting/ 无法直接打开。现在好像挂了
+https://googiehost.com/freehosting.html 有人打广告；需要填 WHY DO YOU NEED THIS ACCOUNT?
+https://freehostingnoads.net/ 好像存在推广；需要填姓名，手机，邮箱，地址
+https://www.biz.nf/
+https://www.lima-city.de/
+https://www.zzz.com.ua/en
+https://viewen.com/free-cloud-hosting/ https://dashboard.viewen.com/?language=chinese 好像quora的人评价比较高，但网站没有明显说免费
+https://wpnode.net/free-hosting/ 有wp，php和mysql，空间1G；但要信用卡；无法直接打开
+https://www.myownfreehost.net/
+https://www.xrea.com/ 日本的
+http://sitemix.jp/ 日本的
+https://www.krypt.com/zh/cloud/wordpress 只有wp，免费版暂时卖光了；无法直接打开
+https://www.uhostall.com/free-hosting.php
+https://pipni.cz/
+https://www.heliohost.org Community powered free hosting for everyone 感觉比较好
+https://woomhost.com/
+https://www.instafree.com/ 封了国内的IP
+https://www.hostpoco.com/
+https://profreehost.com/
+https://www.websitebuilder.com/pricing
+http://razyhosting.com/
+http://0fees.us/hosting.php
+--
+二次售卖https://ifastnet.com/的：
+http://olab.in
+https://byet.host/free-hosting
+http://efreehost.com
+
+---
+Drag and Drop的：
+
+https://zh.wix.com/
+https://webflow.com/
+https://www.weebly.com/ 无法直接打开
+https://www.squarespace.com/
+https://www.ucraft.com/free-web-hosting
+https://sites.google.com
+https://www.ucoz.com 无法直接打开
+--
+国内的：
+https://www.qifeiye.com/
+https://www.strikingly.com/ https://www.sxl.cn/
+https://jz.fkw.com/
+http://www.wqdian.com/
+http://www.zhuzi.me/
+https://www.zhihu.com/question/19665744
+
+---
+号称免费VPS：
+host1free/haphost
+https://www.gigarocket.net/free-vps.php 也有free hosting
+zulutrade
+Vpswala.org
+Xrea：https://www.freehao123.com/xrea-ssl/
+
+---
+Wordpress:
+https://www.accuwebhosting.com/web-hosting/free-wordpress-hosting
+https://pantheon.io/plans/pricing
+https://wordify.com/wordpress-hosting/wp-devsites/
+https://www.getshifter.io/
