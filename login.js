@@ -19,10 +19,11 @@ function delayTime(ms) {
 
  for (const account of accounts) {
   const { username, password } = account;
-  let retries = 0;
-  let success = false;
 
-  while (retries < 3 && !success) {
+  // 初始化重试次数
+  let retries = 3;
+
+  while (retries > 0) {
   if (browser === null) {
    console.error('浏览器未启动');
    break;
@@ -36,8 +37,13 @@ function delayTime(ms) {
 
    // ...
 
+   // 登录成功
+   retries = 0;
+   break;
+
   } catch (error) {
    console.error(`账号 ${username} 登录时出现错误: ${error}`);
+   retries--;
   } finally {
    // 关闭页面
    await page.close();
