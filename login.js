@@ -33,7 +33,12 @@ function delayTime(ms) {
 
   try {
    // 设置登录超时时间
-   await page.setDefaultTimeout(3000);
+   if (browser !== null) {
+    await page.setNavigationTimeout(3000);
+   } else {
+    console.error('浏览器未启动');
+    break;
+   }
 
    // ...
 
