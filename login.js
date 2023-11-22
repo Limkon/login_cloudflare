@@ -23,6 +23,11 @@ function delayTime(ms) {
   let success = false;
 
   while (retries < 3 && !success) {
+  if (browser === null) {
+   console.error('浏览器未启动');
+   break;
+  }
+
   const page = await browser.newPage();
 
   try {
@@ -50,6 +55,8 @@ function delayTime(ms) {
  console.error(`登录时出现错误: ${error}`);
  } finally {
  // 关闭浏览器
- await browser.close();
+ if (browser !== null) {
+  await browser.close();
+ }
  }
 })();
