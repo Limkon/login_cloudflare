@@ -29,15 +29,17 @@ function delayTime(ms) {
    break;
   }
 
-  // 检查 browser 变量是否为 null
-  if (browser === null) {
-   continue;
-  }
-
   const page = await browser.newPage();
 
   try {
+   // 设置登录超时时间
+   await page.setDefaultTimeout(3000);
+
    // ...
+
+   // 登录成功
+   retries = 0;
+   break;
 
   } catch (error) {
    console.error(`账号 ${username} 登录时出现错误: ${error}`);
