@@ -33,23 +33,31 @@ function delayTime(ms) {
 
         try {
           // 设置登录超时时间
-          await page.setDefaultNavigationTimeout(3000); // 设置默认导航超时
+          await page.setDefaultNavigationTimeout(10000); // 设置默认导航超时为10秒
+
+          // 处理重定向
+          page.on('response', async (response) => {
+            if ([301, 302].includes(response.status())) {
+              const redirectUrl = response.headers()['location'];
+              await page.goto(redirectUrl);
+            }
+          });
 
           // 打开网页
-          await page.goto('http://www.23hyz.com/index/Index/Userlogins.html'); // 请将'网页地址'替换为实际的网页地址
+          await page.goto('http://www.23hyz.com/index/Index/Userlogins.html');
 
           // 输入用户名和密码
-          await page.type('#content_name', username); // 请将'#content_name'替换为实际的用户名输入框选择器
-          await page.type('#content_password', password); // 请将'#content_password'替换为实际的密码输入框选择器
+          await page.type('#content_name', username);
+          await page.type('#content_password', password);
 
           // 点击登录按钮
-          await page.click('.content_button button'); // 请将'.content_button button'替换为实际的登录按钮选择器
+          await page.click('.content_button button');
 
-          // 等待页面加载完成，你可以根据实际情况修改等待时间
+          // 等待页面加载完成
           await page.waitForTimeout(5000);
 
           // 截图保存，用于调试或检查登录是否成功
-          await page.screenshot({ path: `login_result_${username}.png` }); // 文件名包含用户名
+          await page.screenshot({ path: `login_result_${username}.png` });
 
           // 登录成功
           retries = 0;
@@ -63,7 +71,7 @@ function delayTime(ms) {
           await page.close();
 
           // 用户之间添加随机延时
-          const delay = Math.floor(Math.random() * 5000) + 1000; // 随机延时1秒到6秒之间
+          const delay = Math.floor(Math.random() * 5000) + 1000;
           await delayTime(delay);
         }
       }
