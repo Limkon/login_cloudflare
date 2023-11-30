@@ -35,7 +35,21 @@ function delayTime(ms) {
           // 设置登录超时时间
           await page.setDefaultNavigationTimeout(3000); // 设置默认导航超时
 
-          // ...
+          // 打开网页
+          await page.goto('网页地址'); // 请将'网页地址'替换为实际的网页地址
+
+          // 输入用户名和密码
+          await page.type('#content_name', username); // 请将'#content_name'替换为实际的用户名输入框选择器
+          await page.type('#content_password', password); // 请将'#content_password'替换为实际的密码输入框选择器
+
+          // 点击登录按钮
+          await page.click('.content_button button'); // 请将'.content_button button'替换为实际的登录按钮选择器
+
+          // 等待页面加载完成，你可以根据实际情况修改等待时间
+          await page.waitForTimeout(5000);
+
+          // 截图保存，用于调试或检查登录是否成功
+          await page.screenshot({ path: `login_result_${username}.png` }); // 文件名包含用户名
 
           // 登录成功
           retries = 0;
