@@ -36,7 +36,7 @@ function delayTime(ms) {
           await page.setDefaultNavigationTimeout(3000); // 设置默认导航超时
 
           // 打开网页
-          await page.goto('网页地址'); // 请将'网页地址'替换为实际的网页地址
+          await page.goto('http://www.23hyz.com/index/Index/Userlogins.html'); // 请将'网页地址'替换为实际的网页地址
 
           // 输入用户名和密码
           await page.type('#content_name', username); // 请将'#content_name'替换为实际的用户名输入框选择器
