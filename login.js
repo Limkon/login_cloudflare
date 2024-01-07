@@ -14,7 +14,7 @@ function delayTime(ms) {
 
   // 读取 IP 列表
   const ipList = fs.readFileSync('IPlist.txt', 'utf-8').split('\n');
-  console.log(`IP 列表:\n${ipList.join('\n')}`);
+  console.log(`IP 列表：\n${ipList.join('\n')}`);
 
   try {
     // 读取 accounts.json 文件中的 JSON 字符串，如果缓存存在则使用缓存数据
@@ -74,7 +74,7 @@ function delayTime(ms) {
         break;
 
       } catch (error) {
-        console.error(`账号 ${username} 登录时出现错误: ${error}`);
+        console.error(`账号 ${username} 登录时出现错误：${error}`);
         retries--;
       } finally {
         // 关闭页面
@@ -88,7 +88,7 @@ function delayTime(ms) {
 
     console.log('所有账号登录成功！');
   } catch (error) {
-    console.error(`登录时出现错误: ${error}`);
+    console.error(`登录时出现错误：${error}`);
   } finally {
     // 关闭浏览器
     if (browser !== null) {
