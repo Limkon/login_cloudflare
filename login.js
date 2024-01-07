@@ -73,13 +73,11 @@ function delayTime(ms) {
         retries = 0;
         break;
 
-      try {
-  // 登录操作代码
-} catch (error) {
-  console.error(`账号 ${username} 登录时出现错误: ${error}`);
-  retries--;
-}
-
+      } catch (error) {
+        console.error(`账号 ${username} 登录时出现错误: ${error}`);
+        retries--;
+      } finally {
+        // 关闭页面
         await page.close();
 
         // 用户之间添加随机延时
