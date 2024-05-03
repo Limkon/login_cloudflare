@@ -54,7 +54,7 @@ function delayTime(ms) {
         page.setExtraHTTPHeaders({ 'Proxy-Authorization': `Basic ${Buffer.from(`username:password`).toString('base64')}` });
 
         // 打开网页
-        await page.goto('http://www.23hyz.com/index/Index/Userlogins.html');
+        await page.goto('http://www.7xf.com/index/Index/Userlogins.html');
 
         // 输入用户名和密码
         await page.type('#content_name', username);
